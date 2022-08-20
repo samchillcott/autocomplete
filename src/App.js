@@ -14,6 +14,11 @@ function App() {
     loadUsers()
   }, [])
 
+  const onSuggestHandler = (text) => {
+    setText(text)
+    setSuggestions([])
+  }
+
   const onChangeHandler = (text) => {
     let matches = []
     if (text.length > 0) {
@@ -22,7 +27,6 @@ function App() {
         return user.email.match(regex)
       })
     }
-    console.log(matches);
     setSuggestions(matches)
     setText(text)
   }
@@ -30,6 +34,9 @@ function App() {
   return (
     <div className="App">
       <input type="text" onChange={ e => onChangeHandler(e.target.value) } value={ text } />
+      { suggestions && suggestions.map((suggestion) =>
+        <div className="suggestion" key={ suggestion.email } onClick={ () => onSuggestHandler(suggestion.email) }>{ suggestion.email }</div>
+      ) }
     </div>
   );
 }
