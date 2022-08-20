@@ -6,7 +6,7 @@ function App() {
   const [users, setUsers] = useState([])
   useEffect(() => {
     const loadUsers = async () => {
-      const response = await axios.get()
+      const response = await axios.get('https://reqres.in/api/users?page=2')
       console.log(response.data);
       setUsers(response.data.data)
     }
