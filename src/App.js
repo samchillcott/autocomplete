@@ -33,9 +33,24 @@ function App() {
 
   return (
     <div className="App">
-      <input type="text" onChange={ e => onChangeHandler(e.target.value) } value={ text } />
+      <input
+        type="text"
+        onChange={ e => onChangeHandler(e.target.value) }
+        value={ text }
+        onBlur={ () => {
+          setTimeout(() => {
+            setSuggestions([])
+          }, 100);
+        } }
+      />
       { suggestions && suggestions.map((suggestion) =>
-        <div className="suggestion" key={ suggestion.email } onClick={ () => onSuggestHandler(suggestion.email) }>{ suggestion.email }</div>
+        <div
+          className="suggestion"
+          key={ suggestion.email }
+          onClick={ () => onSuggestHandler(suggestion.email) }
+        >
+          { suggestion.email }
+        </div>
       ) }
     </div>
   );
